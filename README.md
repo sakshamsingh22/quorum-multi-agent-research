@@ -1,6 +1,11 @@
 # 🔷 Quorum: Multi-Agent AI Research Assistant
 
-![Quorum Demo](https://via.placeholder.com/1000x500.png?text=Add+a+Screenshot+of+Quorum+UI+Here)
+<p align="center">
+  <img src="assets/demo_running.png" alt="Quorum Agents In Action" width="800"/>
+</p>
+<p align="center">
+  <img src="assets/demo_report.png" alt="Quorum Generated Report" width="800"/>
+</p>
 
 **Quorum** is a powerful multi-agent AI research pipeline powered by [LangChain](https://python.langchain.com/) and [LangGraph](https://python.langchain.com/docs/langgraph), featuring a modern, highly responsive frontend built with [Streamlit](https://streamlit.io/). 
 
