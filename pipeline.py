@@ -1,75 +1,42 @@
-from agents import build_reader_agent , build_search_agent , writer_chain , critic_chain
+"""Orchestrate Quorum's four research stages."""
+from agents import build_reader_agent, build_search_agent, writer_chain, critic_chain
 
-def run_research_pipeline(topic : str) -> dict:
 
-    state = {}
+def run_research_pipeline(topic: str) -> dict:
+    """Run search, reading, report-writing and critique for a research topic."""
+    if not isinstance(topic, str) or not topic.strip():
+        raise ValueError("Research topic must not be empty.")
+    topic = topic.strip()
+    if len(topic) > 500:
+        raise ValueError("Research topic must be 500 characters or fewer.")
 
-    #search agent working 
-    print("\n"+" ="*50)
-    print("step 1 - search agent is working ...")
-    print("="*50)
-
-    search_agent = build_search_agent()
-    search_result = search_agent.invoke({
-        "messages" : [("user", f"Find recent, reliable and detailed information about: {topic}")]
+    state = {"topic": topic}
+    search_result = build_search_agent().invoke({
+        "messages": [("user", f"Find recent, reliable and detailed information about: {topic}")]
     })
-    state["search_results"] = search_result['messages'][-1].content
+    state["search_results"] = search_result["messages"][-1].content
+    if not state["search_results"].strip():
+        raise RuntimeError("Search stage returned no usable results.")
 
-    print("\n search result ",state['search_results'])
-
-    #step 2 - reader agent 
-    print("\n"+" ="*50)
-    print("step 2 - Reader agent is scraping top resources ...")
-    print("="*50)
-
-    reader_agent = build_reader_agent()
-    reader_result = reader_agent.invoke({
+    reader_result = build_reader_agent().invoke({
         "messages": [("user",
-            f"Based on the following search results about '{topic}', "
-            f"pick the most relevant URL and scrape it for deeper content.\n\n"
-            f"Search Results:\n{state['search_results'][:800]}"
-        )]
+            f"Choose the most relevant public URL from these results about '{topic}' "
+            f"and extract useful content.\n\n{state['search_results'][:5000]}")]
     })
+    state["scraped_content"] = reader_result["messages"][-1].content
+    if not state["scraped_content"].strip():
+        raise RuntimeError("Reader stage returned no usable content.")
 
-    state['scraped_content'] = reader_result['messages'][-1].content
-
-    print("\nscraped content: \n", state['scraped_content'])
-
-    #step 3 - writer chain 
-
-    print("\n"+" ="*50)
-    print("step 3 - Writer is drafting the report ...")
-    print("="*50)
-
-    research_combined = (
-        f"SEARCH RESULTS : \n {state['search_results']} \n\n"
-        f"DETAILED SCRAPED CONTENT : \n {state['scraped_content']}"
+    research = (
+        f"SEARCH RESULTS:\n{state['search_results']}\n\n"
+        f"DETAILED SOURCE CONTENT:\n{state['scraped_content']}"
     )
-
-    state["report"] = writer_chain.invoke({
-        "topic" : topic,
-        "research" : research_combined
-    })
-
-    print("\n Final Report\n",state['report'])
-
-    #critic report 
-
-    print("\n"+" ="*50)
-    print("step 4 - critic is reviewing the report ")
-    print("="*50)
-
-    state["feedback"] = critic_chain.invoke({
-        "report":state['report']
-    })
-
-    print("\n critic report \n", state['feedback'])
-
+    state["report"] = writer_chain.invoke({"topic": topic, "research": research})
+    if not str(state["report"]).strip():
+        raise RuntimeError("Writer stage returned an empty report.")
+    state["feedback"] = critic_chain.invoke({"report": state["report"]})
     return state
 
 
-
 if __name__ == "__main__":
-    topic = input("\n Enter a research topic : ")
-    run_research_pipeline(topic)
-
+    run_research_pipeline(input("Enter a research topic: "))
