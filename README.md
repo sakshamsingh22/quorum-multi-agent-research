@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:8de6b915-83c4-4345-b9a3-7d9a1e8d75d3" width="220" alt="Quorum AI logo" />
+<img src="assets/quorum-mark.svg" width="88" alt="Quorum logo mark" />
 
 # QUORUM
 
@@ -86,6 +86,19 @@ The Critic Agent responds with a score out of 10, strengths, areas to improve, a
 ### Agent workflow in action
 
 ![Quorum workflow running](assets/demo_running.png)
+
+## 🎨 Brand system
+
+Quorum uses a focused dark-interface palette designed for a calm, high-contrast research workspace.
+
+| Token | Color | Hex |
+| --- | --- | --- |
+| Midnight | <span style="color:#0B1020">■</span> | `#0B1020` |
+| Indigo | <span style="color:#6558F5">■</span> | `#6558F5` |
+| Cyan | <span style="color:#38D9E6">■</span> | `#38D9E6` |
+| Cloud | <span style="color:#F8FAFC">■</span> | `#F8FAFC` |
+
+The repository mark is available as a scalable SVG at [assets/quorum-mark.svg](assets/quorum-mark.svg).
 
 ## ⚙️ Technology
 
