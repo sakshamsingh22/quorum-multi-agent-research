@@ -7,6 +7,16 @@ Quorum is a four-stage research assistant built with LangChain, Mistral AI, Tavi
 3. **Writer:** synthesize findings into a structured report.
 4. **Critic:** review the report and provide actionable feedback.
 
+## Screenshots
+
+The screenshots below are committed project assets from the application.
+
+| Application | Generated report |
+| --- | --- |
+| ![Quorum application home](assets/demo_home.png) | ![Quorum generated report](assets/demo_report.png) |
+
+![Quorum workflow running](assets/demo_running.png)
+
 ## Architecture
 
 ```mermaid
@@ -29,7 +39,7 @@ git clone https://github.com/sakshamsingh22/quorum-multi-agent-research.git
 cd quorum-multi-agent-research
 python -m venv .venv
 source .venv/bin/activate
-# Windows: .venv\Scripts\activate
+# Windows: .venv\\Scripts\\activate
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 cp .env.example .env
