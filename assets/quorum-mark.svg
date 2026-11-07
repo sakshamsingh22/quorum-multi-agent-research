@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Quorum mark</title>
+  <desc id="desc">Four connected research nodes converge into a central point, forming an abstract Q.</desc>
+  <defs>
+    <linearGradient id="q" x1="18" y1="16" x2="108" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38D9E6"/>
+      <stop offset=".52" stop-color="#6558F5"/>
+      <stop offset="1" stop-color="#9A7BFF"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#q)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M64 22 93 39v34L64 90 35 73V39z" stroke-width="8"/>
+    <path d="M64 22v31m29-14L67 56M93 73 67 59M64 90V59M35 73l26-14M35 39l26 14" stroke-width="6" opacity=".9"/>
+    <path d="m64 90 24 15" stroke-width="8"/>
+  </g>
+  <circle cx="64" cy="56" r="9" fill="#F8FAFC"/>
+  <circle cx="64" cy="56" r="4" fill="#6558F5"/>
+</svg>
